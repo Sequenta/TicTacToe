@@ -3,9 +3,28 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Tic Tac Toe game</title>
+    <script type="text/javascript" src="scripts/gamecore.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/knockout-2.2.1.js"></script>
+    <link href="styles/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <link href="styles/styles.css" rel="stylesheet"/>
 </head>
 <body>
-
+    <div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2 gamePrefsBack">
+      <input class="input-mini" type="text" placeholder="width" data-bind="value: width"/><br/>
+      <input class="input-mini" type="text" placeholder="height" data-bind="value: heigth"/><br/>
+      <button class="btn-success" data-bind="click: onPlay">Play!</button>
+    </div>
+    <div class="span10 gameTableBack">
+      
+    </div>
+  </div>
+</div>
+    <script type="text/javascript">
+        
+    </script>
 </body>
 </html>
