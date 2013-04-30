@@ -24,7 +24,18 @@
   </div>
 </div>
     <script type="text/javascript">
-        
+        function gameModel() {
+            var self = this;
+
+            self.width = ko.observable(0);
+            self.heigth = ko.observable(0);
+
+            self.onPlay = function () {
+                drawField(self.width(), self.heigth());
+            }
+            return self;
+        }
+        ko.applyBindings(new gameModel());
     </script>
 </body>
 </html>
