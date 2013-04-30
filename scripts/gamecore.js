@@ -1,5 +1,6 @@
 function drawField(width,heigth) {
 
+    //TODO: check width and height
     var cellWidth = 20;
     var cellHeight = 20
     var columns =  width;
@@ -24,5 +25,13 @@ function drawField(width,heigth) {
         ctx.closePath();
     }
     alert("Field parameters:\n width " + width + "\n heigth:" + heigth);
+}
+
+function placeFigure(event,turn) {
+    if (turn % 2 == 0) {
+        alert("X");
+    }
+    else
+        alert("O");
 }
 
