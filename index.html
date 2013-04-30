@@ -19,7 +19,7 @@
       <button class="btn-success" data-bind="click: onPlay">Play!</button>
     </div>
     <div class="span10 gameTableBack">
-      <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+      <canvas id="gameGrid" width="200" height="100" class="grid">
         Your browser does not support the HTML5 canvas tag.
       </canvas>
     </div>
@@ -29,8 +29,8 @@
         function gameModel() {
             var self = this;
 
-            self.width = ko.observable(0);
-            self.heigth = ko.observable(0);
+            self.width = ko.observable();
+            self.heigth = ko.observable();
 
             self.onPlay = function () {
                 drawField(self.width(), self.heigth());
