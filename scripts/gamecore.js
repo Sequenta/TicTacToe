@@ -27,11 +27,14 @@ function drawField(width,heigth) {
     alert("Field parameters:\n width " + width + "\n heigth:" + heigth);
 }
 
-function placeFigure(event,turn) {
+function placeFigure(event, turn) {
+    var canvas = document.getElementById('gameGrid');
+    var x = Math.floor((event.pageX - canvas.offsetLeft) / 20);
+    var y = Math.floor((event.pageY - canvas.offsetTop) / 20);
     if (turn % 2 == 0) {
-        alert("X");
+        alert("X was placed on cell(" + x + "," + y + ")");
     }
     else
-        alert("O");
+        alert("O was placed on cell(" + x + "," + y + ")");
 }
 
