@@ -58,10 +58,17 @@ function placeFigure(event, turn) {
     var canvas = document.getElementById('gameGrid');
     var x = Math.floor((event.pageX - canvas.offsetLeft) / 20);
     var y = Math.floor((event.pageY - canvas.offsetTop) / 20);
+    var player = checkTurn(turn);
+    if (grid[x][y] == 0)
+        grid[x][y] = player;
+    showGrid();
+}
+
+function checkTurn(turn) {
     if (turn % 2 == 0) {
-        alert("X was placed on cell(" + x + "," + y + ")");
+        return 1;
     }
     else
-        alert("O was placed on cell(" + x + "," + y + ")");
+        return 2;
 }
 
