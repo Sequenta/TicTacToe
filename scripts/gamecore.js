@@ -1,10 +1,15 @@
-function drawField(width,heigth) {
+var grid = new Array();
+var cellWidth = 20;
+var cellHeight = 20;
+var columns;
+var rows;
+
+function drawField(width, heigth) {
 
     //TODO: check width and height
-    var cellWidth = 20;
-    var cellHeight = 20
-    var columns =  width;
-    var rows = heigth;
+    columns =  width;
+    rows = heigth;
+    grid = createGrid(rows, columns);
 
     var canvasWidth = cellWidth * columns;
     var canvasHeight = cellHeight * rows;
@@ -14,6 +19,7 @@ function drawField(width,heigth) {
     canvas.height = canvasHeight;
     var ctx = canvas.getContext('2d');
     drawGrid(ctx);
+    showGrid();
 
     function drawGrid(ctx) {
         ctx.beginPath();
@@ -24,7 +30,28 @@ function drawField(width,heigth) {
         }
         ctx.closePath();
     }
-    alert("Field parameters:\n width " + width + "\n heigth:" + heigth);
+}
+
+function createGrid(rows, columns) {
+    var arr = new Array();
+    for (var i = 0; i < columns; i++) {
+        arr[i] = new Array();
+        for (var j = 0; j < rows; j++) {
+            arr[i][j] = 0;
+        }
+    }
+    return arr;
+}
+
+function showGrid() {
+    var stringGrid = "";
+    for (var i = 0; i < rows; i++) {
+        stringGrid += "\n";
+        for (var j = 0; j < columns; j++) {
+            stringGrid+= grid[j][i] + " ";
+        }
+    }
+    alert(stringGrid);
 }
 
 function placeFigure(event, turn) {
