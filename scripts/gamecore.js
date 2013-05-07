@@ -4,6 +4,7 @@ var cellHeight = 20;
 var columns;
 var rows;
 var winSequence;
+var movesCount = 0;
 
 function drawField(width, heigth) {
 
@@ -69,8 +70,9 @@ function placeFigure(event, turn) {
     if (grid[x][y] == 0) {
         var player = checkTurn(turn);
         grid[x][y] = player;
-        drawFigure(x,y,player);
-        checkForWinner(player,x,y);
+        drawFigure(x, y, player);
+        movesCount += 1;
+        checkForWinner(player, x, y);
     }
     else {
         return;
@@ -109,6 +111,7 @@ function checkForWinner(player, x, y) {
     checkRows(player, y);
     checkDiagonal(player);
     checkAntiDiagonal(player);
+    checkDraw();
 
     function checkColumns(player, x) {
         for (var i = 0; i < winSequence; i++) {
@@ -151,11 +154,25 @@ function checkForWinner(player, x, y) {
             }
         }
     }
+
+    function checkDraw() {
+        if (movesCount == rows * columns) {
+            showWinner(0);
+        }
+    }
+
 }
 
 function showWinner(player) {
-    alert(player);
-    drawField(columns, rows)
+    switch (player) {
+        case 1: alert("Player X wins!");
+            break;
+        case 2: alert("Player O wins!");
+            break;
+        default: alert("Draw!");
+            break;
+    }
+    movesCount = 0;
 }
 
 function checkTurn(turn) {
