@@ -26,25 +26,36 @@
   </div>
 </div>
     <script type="text/javascript">
+       
         function gameModel() {
             var self = this;
         
             self.turn = ko.observable(1);
             self.width = ko.observable();
             self.heigth = ko.observable();
-            
+
             self.onPlayerClick = function (data, event) {
                 self.turn(self.turn() + 1);
                 placeFigure(event, self.turn());
             }
 
             self.onPlay = function () {
-                //TODO: check width and height
-                drawField(self.width(), self.heigth());
+                if (self.width() < 3 || self.heigth() < 3) {
+                    alert("Invalid height or width");
+                    
+                }
+                else {
+                    drawField(self.width(), self.heigth());
+                    self.turn(1);
+                }
             }
             return self;
         }
-        ko.applyBindings(new gameModel());
+
+        window.onload = function () {
+            ko.applyBindings(new gameModel());
+            drawField(3, 3);
+        };
     </script>
 </body>
 </html>
