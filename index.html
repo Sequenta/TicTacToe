@@ -12,14 +12,21 @@
     <link href="styles/styles.css" rel="stylesheet"/>
 </head>
 <body>
-    <div class="container-fluid">
+<div class="container-fluid">
   <div class="row-fluid">
     <div class="span2 gamePrefsBack">
-      <input class="input-mini" type="text" placeholder="width" data-bind="value: width"/><br/>
-      <input class="input-mini" type="text" placeholder="height" data-bind="value: heigth"/><br/>
+      <div class="input-prepend">
+        <span class="add-on">Width</span>
+        <input class="input-mini" id="widthInput" type="text" placeholder="width" data-bind="value: width"/><br/>
+      </div>
+       <div class="input-prepend">
+        <span class="add-on">Height</span>
+        <input class="input-mini" id="heightInput" type="text" placeholder="height" data-bind="value: heigth"/><br/>
+      </div>
       <button class="btn-success" data-bind="click: onPlay">Play!</button>
     </div>
     <div class="span10 gameTableBack">
+    <h2><span data-bind="text: player"></span></h2>
       <canvas id="gameGrid" width="200" height="100" class="grid" data-bind="click: onPlayerClick">
         Your browser does not support the HTML5 canvas tag.
       </canvas>
@@ -30,8 +37,9 @@
        
         function gameModel() {
             var self = this;
-        
+
             self.turn = ko.observable(1);
+            self.player = ko.observable("Player X turn")
             self.width = ko.observable();
             self.heigth = ko.observable();
 
@@ -39,6 +47,15 @@
                 self.turn(self.turn() + 1);
                 placeFigure(event, self.turn());
             }
+
+            self.player = ko.computed(function () {
+                if (checkTurn(self.turn()) == 1) {
+                    return "Player O turn";
+                }
+                else {
+                    return "Player X turn";
+                }
+            }, this);
 
             self.onPlay = function () {
                 if (self.width() < 3 || self.heigth() < 3) {
