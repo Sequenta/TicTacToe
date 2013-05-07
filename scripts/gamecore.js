@@ -107,6 +107,8 @@ function drawFigure(x, y, player) {
 function checkForWinner(player, x, y) {
     checkColumns(player, x);
     checkRows(player, y);
+    checkDiagonal(player);
+    checkAntiDiagonal(player);
 
     function checkColumns(player, x) {
         for (var i = 0; i < winSequence; i++) {
