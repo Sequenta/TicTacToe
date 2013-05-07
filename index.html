@@ -32,7 +32,7 @@
             self.turn = ko.observable(1);
             self.width = ko.observable();
             self.heigth = ko.observable();
-
+            
             self.onPlayerClick = function (data, event) {
                 self.turn(self.turn() + 1);
                 placeFigure(event, self.turn());

@@ -21,7 +21,6 @@ function drawField(width, heigth) {
     canvas.height = canvasHeight;
     var ctx = canvas.getContext('2d');
     drawGrid(ctx);
-    showGrid();
 
     function drawGrid(ctx) {
         ctx.beginPath();
@@ -71,7 +70,6 @@ function placeFigure(event, turn) {
         var player = checkTurn(turn);
         grid[x][y] = player;
         drawFigure(x,y,player);
-        //showGrid();
         checkForWinner(player,x,y);
     }
     else {
