@@ -110,7 +110,7 @@ function checkForWinner(player, x, y) {
     checkColumns(player, x, y);
     checkRows(player, x, y);
     checkDiagonal(player, x, y);
-    checkAntiDiagonal(player);
+    checkAntiDiagonal(player, x, y);
     checkDraw();
 
     function checkColumns(player, x, y) {
@@ -176,7 +176,7 @@ function checkForWinner(player, x, y) {
         for (var i = 0; i <= winSequence - 1; i++) {
             tmpX++;
             tmpY++;
-            if (tmpX > rows - 1 || tmpY > columns - 1) {
+            if (tmpX > columns - 1 || tmpY > rows - 1) {
                 break;
             }
             if (grid[tmpX][tmpY] != player) {
@@ -206,12 +206,39 @@ function checkForWinner(player, x, y) {
         }
     }
 
-    function checkAntiDiagonal(player) {
-        for (var i = 0; i < winSequence; i++) {
-            if (grid[i][(winSequence - 1) - i] != player)
-    			break;
-            if (i == winSequence - 1) {
-    		    showWinner(player);
+    function checkAntiDiagonal(player, x, y) {
+        var counter = 1;
+        var tmpX = x;
+        var tmpY = y;
+        for (var i = 0; i <= winSequence - 1; i++) {
+            tmpX++;
+            tmpY--;
+            if (tmpX > columns - 1 || tmpY < 0) {
+                break;
+            }
+            if (grid[tmpX][tmpY] != player) {
+                break;
+            }
+            counter++;
+            if (counter == winSequence) {
+                showWinner(player);
+            }
+        }
+
+        tmpX = x;
+        tmpY = y;
+        for (var i = 0; i <= winSequence - 1; i++) {
+            tmpX--;
+            tmpY++;
+            if (tmpX < 0 || tmpY > rows - 1) {
+                break;
+            }
+            if (grid[tmpX][tmpY] != player) {
+                break;
+            }
+            counter++;
+            if (counter == winSequence) {
+                showWinner(player);
             }
         }
     }
