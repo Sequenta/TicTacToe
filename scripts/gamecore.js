@@ -16,7 +16,7 @@ function drawField(width, heigth) {
 
     var canvasWidth = cellWidth * columns;
     var canvasHeight = cellHeight * rows;
-    
+
     var canvas = document.getElementById('gameGrid');
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
@@ -108,7 +108,7 @@ function drawFigure(x, y, player) {
 
 function checkForWinner(player, x, y) {
     checkColumns(player, x);
-    checkRows(player, y);
+    checkRows(player,x, y);
     checkDiagonal(player);
     checkAntiDiagonal(player);
     checkDraw();
@@ -123,11 +123,29 @@ function checkForWinner(player, x, y) {
         }
     }
 
-    function checkRows(player, y) {
-        for (var i = 0; i < winSequence; i++) {
-            if (grid[i][y] != player)
+    function checkRows(player, x, y) {
+        var counter = 1;
+        for (var i = x + 1; i <= x + winSequence - 1; i++) {
+            if (i > rows - 1) {
                 break;
-            if (i == winSequence - 1) {
+            }
+            if (grid[i][y] != player) {
+                break;
+            }
+            counter++;
+            if (counter == winSequence) {
+                showWinner(player);
+            }
+        }
+        for (var i = x - 1; i > x - winSequence - 1; i--) {
+            if (i < 0) {
+                break;
+            }
+            if (grid[i][y] != player) {
+                break;
+            }
+            counter++;
+            if (counter == winSequence) {
                 showWinner(player);
             }
         }
