@@ -107,17 +107,35 @@ function drawFigure(x, y, player) {
 }
 
 function checkForWinner(player, x, y) {
-    checkColumns(player, x);
-    checkRows(player,x, y);
-    checkDiagonal(player);
+    checkColumns(player, x, y);
+    checkRows(player, x, y);
+    checkDiagonal(player, x, y);
     checkAntiDiagonal(player);
     checkDraw();
 
-    function checkColumns(player, x) {
-        for (var i = 0; i < winSequence; i++) {
-            if (grid[x][i] != player)
+    function checkColumns(player, x, y) {
+        var counter = 1;
+        for (var i = y + 1; i <= y + winSequence - 1; i++) {
+            if (i > rows - 1) {
                 break;
-            if (i == winSequence - 1) {
+            }
+            if (grid[x][i] != player) {
+                break;
+            }
+            counter++;
+            if (counter == winSequence) {
+                showWinner(player);
+            }
+        }
+        for (var i = y - 1; i > y - winSequence - 1; i--) {
+            if (i < 0) {
+                break;
+            }
+            if (grid[x][i] != player) {
+                break;
+            }
+            counter++;
+            if (counter == winSequence) {
                 showWinner(player);
             }
         }
@@ -126,7 +144,7 @@ function checkForWinner(player, x, y) {
     function checkRows(player, x, y) {
         var counter = 1;
         for (var i = x + 1; i <= x + winSequence - 1; i++) {
-            if (i > rows - 1) {
+            if (i > columns - 1) {
                 break;
             }
             if (grid[i][y] != player) {
@@ -151,14 +169,39 @@ function checkForWinner(player, x, y) {
         }
     }
 
-    function checkDiagonal(player) {
-        if (x == y) {
-            for (var i = 0; i < winSequence; i++) {
-                if (grid[i][i] != player)
-                    break;
-                if (i == winSequence - 1) {
-                    showWinner(player);
-                }
+    function checkDiagonal(player, x, y) {
+        var counter = 1;
+        var tmpX = x;
+        var tmpY = y;
+        for (var i = 0; i <= winSequence - 1; i++) {
+            tmpX++;
+            tmpY++;
+            if (tmpX > rows - 1 || tmpY > columns - 1) {
+                break;
+            }
+            if (grid[tmpX][tmpY] != player) {
+                break;
+            }
+            counter++;
+            if (counter == winSequence) {
+                showWinner(player);
+            }
+        }
+
+        tmpX = x;
+        tmpY = y;
+        for (var i = 0; i <= winSequence - 1; i++) {
+            tmpX--;
+            tmpY--;
+            if (tmpX < 0 || tmpY < 0) {
+                break;
+            }
+            if (grid[tmpX][tmpY] != player) {
+                break;
+            }
+            counter++;
+            if (counter == winSequence) {
+                showWinner(player);
             }
         }
     }
